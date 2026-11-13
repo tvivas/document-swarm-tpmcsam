@@ -1,7 +1,7 @@
 # Exemplo fictício — Playbook de CoE de Nuvem (criação + evolução)
 
 Cenário **inteiramente fictício** para demonstrar o uso da skill
-`document-swarm` em dois pedidos ao Copilot CLI. Os prompts foram escritos
+`document-swarm-tpmcsam` em dois pedidos ao Copilot CLI. Os prompts foram escritos
 para este exemplo; não reproduzem solicitações de um usuário ou cliente.
 O cenário não relata uma execução, notas obtidas ou resultados medidos.
 

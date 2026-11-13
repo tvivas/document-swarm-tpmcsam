@@ -295,7 +295,7 @@ class CheckUpdateTests(unittest.TestCase):
             upstream = work / "upstream"
             upstream.mkdir()
             self._git(upstream, "init", "-b", "main")
-            (upstream / "SKILL.md").write_text('---\nname: document-swarm\nskill_version: "3.5.0"\n---\n# Skill\n', encoding="utf-8")
+            (upstream / "SKILL.md").write_text('---\nname: document-swarm-tpmcsam\nskill_version: "3.5.0"\n---\n# Skill\n', encoding="utf-8")
             self._git(upstream, "add", "SKILL.md")
             self._git(upstream, "commit", "-m", "initial 3.5.0")
 
@@ -308,7 +308,7 @@ class CheckUpdateTests(unittest.TestCase):
             self.assertEqual(initial["local_version"], "3.5.0")
 
             # Advance upstream to 3.6.0
-            (upstream / "SKILL.md").write_text('---\nname: document-swarm\nskill_version: "3.6.0"\n---\n# Skill v3.6\n', encoding="utf-8")
+            (upstream / "SKILL.md").write_text('---\nname: document-swarm-tpmcsam\nskill_version: "3.6.0"\n---\n# Skill v3.6\n', encoding="utf-8")
             self._git(upstream, "add", "SKILL.md")
             self._git(upstream, "commit", "-m", "release 3.6.0")
 

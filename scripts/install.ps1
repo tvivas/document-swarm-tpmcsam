@@ -5,7 +5,7 @@ param([switch]$WithoutMonitor, [switch]$WithPdf)
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 $RepoRoot = Split-Path -Parent $PSScriptRoot
-$SkillPath = Join-Path $env:USERPROFILE '.copilot\skills\document-swarm'
+$SkillPath = Join-Path $env:USERPROFILE '.copilot\skills\document-swarm-tpmcsam'
 $MonitorPath = Join-Path $env:USERPROFILE '.copilot\extensions\document-swarm-monitor'
 $MonitorSource = Join-Path $RepoRoot '.github\extensions\document-swarm-monitor'
 $PdfPath = Join-Path $env:USERPROFILE '.copilot\extensions\document-swarm-pdf'

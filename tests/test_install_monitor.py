@@ -63,7 +63,7 @@ class MonitorInstallTests(unittest.TestCase):
 
     def check_install(self, shell):
         home = self.base / "home"
-        skill = home / ".copilot" / "skills" / "document-swarm"
+        skill = home / ".copilot" / "skills" / "document-swarm-tpmcsam"
         monitor = home / ".copilot" / "extensions" / "document-swarm-monitor"
         for _ in range(2):
             result = self.install(shell, home)
@@ -84,7 +84,7 @@ class MonitorInstallTests(unittest.TestCase):
         (monitor / "user.txt").write_text("user data", encoding="utf-8")
         result = self.install(shell, home)
         self.assertNotEqual(result.returncode, 0)
-        self.assertFalse((home / ".copilot" / "skills" / "document-swarm").exists())
+        self.assertFalse((home / ".copilot" / "skills" / "document-swarm-tpmcsam").exists())
         self.assertEqual((monitor / "user.txt").read_text(encoding="utf-8"), "user data")
         result = self.install(shell, home, without=True)
         self.assertNotEqual(result.returncode, 0)
@@ -130,7 +130,7 @@ class MonitorInstallTests(unittest.TestCase):
             with self.subTest(shell=shell):
                 result = self.install(shell, home, without=True, pdf=True)
                 self.assertNotEqual(result.returncode, 0)
-                self.assertFalse((home / ".copilot" / "skills" / "document-swarm").exists())
+                self.assertFalse((home / ".copilot" / "skills" / "document-swarm-tpmcsam").exists())
                 self.assertFalse((home / ".copilot" / "extensions" / "document-swarm-pdf").exists())
 
     def test_pdf_collision_does_not_create_partial_installation(self):
@@ -144,5 +144,5 @@ class MonitorInstallTests(unittest.TestCase):
                 result = self.install(shell, home, pdf=True)
                 self.assertNotEqual(result.returncode, 0)
                 self.assertEqual(original.read_text(encoding="utf-8"), "Preserve this directory")
-                self.assertFalse((home / ".copilot" / "skills" / "document-swarm").exists())
+                self.assertFalse((home / ".copilot" / "skills" / "document-swarm-tpmcsam").exists())
                 self.assertFalse((home / ".copilot" / "extensions" / "document-swarm-monitor").exists())

@@ -5,6 +5,13 @@ All notable changes to this skill are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 the skill uses semantic versioning for behavior changes in `SKILL.md`.
 
+## [Unreleased]
+
+### Changed
+
+- Renamed the skill identifier and managed installation path from
+  `document-swarm` to `document-swarm-tpmcsam`.
+
 ## [4.1.0] - 2026-11-12
 
 ### Added

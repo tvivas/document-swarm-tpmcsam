@@ -115,22 +115,22 @@ exige o modo evolução, sem reaproveitar notas como aprovação retroativa.
 ### Linux/macOS
 
 ```bash
-git clone <url-deste-repo> ~/Projects/document-swarm
-cd ~/Projects/document-swarm
+git clone <url-deste-repo> ~/Projects/document-swarm-tpmcsam
+cd ~/Projects/document-swarm-tpmcsam
 ./scripts/install.sh
 ```
 
 ### Windows (PowerShell)
 
 ```powershell
-git clone <url-deste-repo> "$HOME\Projects\document-swarm"
-Set-Location "$HOME\Projects\document-swarm"
+git clone <url-deste-repo> "$HOME\Projects\document-swarm-tpmcsam"
+Set-Location "$HOME\Projects\document-swarm-tpmcsam"
 pwsh .\scripts\install.ps1
 ```
 
 Os instaladores criam links gerenciados para a skill e as extensões habilitadas:
 
-- `~/.copilot/skills/document-swarm` aponta para o clone;
+- `~/.copilot/skills/document-swarm-tpmcsam` aponta para o clone;
 - `~/.copilot/extensions/document-swarm-monitor` aponta para a extensão do clone;
 - `~/.copilot/extensions/document-swarm-pdf` é incluído com `--with-pdf` ou
   `-WithPdf`, independentemente da opção de monitor.

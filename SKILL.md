@@ -1,7 +1,7 @@
 ---
-name: document-swarm
+name: document-swarm-tpmcsam
 skill_version: "4.1.0"
-description: "Use ONLY when the user explicitly asks for a document swarm (e.g., 'use document-swarm', 'monte um swarm', 'rode o doc-swarm') or explicitly wants a full multi-agent swarm cycle with deterministic gates. Do NOT invoke automatically for ordinary document reviews, edits, modifications, summaries, or single-pass writing. If loaded on a request that did not explicitly ask for a swarm, your FIRST action MUST be to ask the user via ask_user whether to use Document Swarm or handle the task directly without it."
+description: "Use ONLY when the user explicitly asks for a document swarm (e.g., 'use document-swarm-tpmcsam', 'monte um swarm', 'rode o doc-swarm') or explicitly wants a full multi-agent swarm cycle with deterministic gates. Do NOT invoke automatically for ordinary document reviews, edits, modifications, summaries, or single-pass writing. If loaded on a request that did not explicitly ask for a swarm, your FIRST action MUST be to ask the user via ask_user whether to use Document Swarm or handle the task directly without it."
 ---
 
 # Document Swarm Skill
@@ -14,7 +14,7 @@ description: "Use ONLY when the user explicitly asks for a document swarm (e.g.,
 
 **Regra de ouro (confirmação antes de iniciar o swarm):**
 Se esta skill foi carregada e o usuário **não pediu explicitamente** `"swarm"`,
-`"doc-swarm"` ou `"document-swarm"` na mensagem (por exemplo, pediu apenas uma
+`"doc-swarm"` ou `"document-swarm-tpmcsam"` na mensagem (por exemplo, pediu apenas uma
 revisão de documento, modificação de arquivo, parecer ou geração direta de
 texto), **NÃO inicie o fluxo do swarm**. Sua **primeira ação obrigatória** é
 chamar `ask_user` com uma única pergunta:
@@ -562,12 +562,12 @@ Resolva `<DOCSWARM>` pelo alvo real da skill instalada:
 
 ```bash
 # Linux/macOS
-DOCSWARM=$(readlink -f "$HOME/.copilot/skills/document-swarm")
+DOCSWARM=$(readlink -f "$HOME/.copilot/skills/document-swarm-tpmcsam")
 ```
 
 ```powershell
 # Windows
-$DOCSWARM = (Get-Item -Force "$env:USERPROFILE\.copilot\skills\document-swarm").Target
+$DOCSWARM = (Get-Item -Force "$env:USERPROFILE\.copilot\skills\document-swarm-tpmcsam").Target
 ```
 
 Resolva `<OUTPUT_ROOT>` nesta ordem:
@@ -1003,7 +1003,7 @@ entram se o portão estiver aprovado.
 
 0. **Confirmação de uso do swarm (quando não solicitado explicitamente pelo nome):**
    Se a mensagem do usuário não pediu explicitamente `"swarm"` / `"doc-swarm"` /
-   `"document-swarm"`, pergunte primeiro via `ask_user` se ele deseja **Execução
+   `"document-swarm-tpmcsam"`, pergunte primeiro via `ask_user` se ele deseja **Execução
    direta (sem Document Swarm)** ou **Executar com Document Swarm completo**.
    Caso escolha execução direta, encerre o uso desta skill imediatamente e faça
    o trabalho diretamente.

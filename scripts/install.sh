@@ -14,7 +14,7 @@ done
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 REPO_ROOT="$(dirname "$SCRIPT_DIR")"
-SKILL_PATH="$HOME/.copilot/skills/document-swarm"
+SKILL_PATH="$HOME/.copilot/skills/document-swarm-tpmcsam"
 MONITOR_PATH="$HOME/.copilot/extensions/document-swarm-monitor"
 MONITOR_SOURCE="$REPO_ROOT/.github/extensions/document-swarm-monitor"
 PDF_PATH="$HOME/.copilot/extensions/document-swarm-pdf"
