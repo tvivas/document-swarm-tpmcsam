@@ -49,9 +49,12 @@ pedido explícito, e não acrescentam dependência ao caminho documental.
 
 ## Perfil editorial técnico
 
-Documentos de arquitetura de nuvem adotam, por padrão, o perfil
-**Principal Cloud Solution Architect**: escrita natural e direta, rigor técnico,
-trade-offs explícitos e utilidade para decisão, sem linguagem promocional.
+Entregas corporativas e de programa podem usar o perfil **Principal TPM/CSAM**:
+decisão ou ação principal primeiro, status temporalmente preciso, owners, prazos,
+rastreabilidade e procedimentos executáveis. Documentos de arquitetura de nuvem
+adotam o perfil **Principal Cloud Solution Architect**: escrita natural e direta,
+rigor técnico, trade-offs explícitos e utilidade para decisão, sem linguagem
+promocional.
 O público e o perfil ficam no brief; a senioridade da análise não obriga o uso
 de jargão com executivos nem substitui a especialidade dos autores.
 
@@ -68,6 +71,8 @@ padrão sugerido.
 Outros domínios adaptam o perfil no enquadramento, sem forçar conteúdo de nuvem.
 As regras e a distribuição por papel estão no
 [contrato editorial](./SKILL.md#21-perfil-editorial-técnico).
+O perfil TPM/CSAM consolidado está em
+[docs/style-guide-tpm-csam.md](./docs/style-guide-tpm-csam.md).
 
 Na versão 4.1 (`comprehension_contract: goldfish-v1`), o revisor editorial
 (`reviewer-*-clarity`) opera em isolamento Goldfish: é despachado em sessão

@@ -109,10 +109,21 @@ O Document Swarm oferece cinco perfis visuais de PDF (`technical-report`, `textb
 
 | Modo / Perfil PDF (`pdf_profile`) | Perfil Editorial (`editorial_profile`) | Quando usar | Estrutura e Ritmo de Leitura | Blocos Visuais e Mídia (`sources/media/`) | Papel do 2º Revisor (`form`) |
 | --- | --- | --- | --- | --- | --- |
-| **`technical-report`** / **`textbook`** | `principal-cloud-solution-architect` (ou especialista técnico do domínio) | Arquiteturas de nuvem, RFCs, diagnósticos de engenharia, laudos e playbooks operacionais. | Abre pela decisão/conclusão executiva; explicita critérios, alternativas, trade-offs, riscos, aceite e reversão. | Diagramas `flow`, `layers`, `bars`, tabelas ponderadas (`weighted`) e fórmulas (`:::formula`) quando o cálculo for necessário. | `reviewer-*-decision`: Completude decisória, trade-offs operacionais, critérios de aceite e reversão. |
+| **`technical-report`** / **`textbook`** | `principal-tpm-csam` para entregas corporativas e de programa; `principal-cloud-solution-architect` para arquitetura e engenharia; ou especialista técnico do domínio | Status reports, propostas, briefings, planos, arquiteturas de nuvem, RFCs, diagnósticos, laudos e playbooks operacionais. | Abre pela decisão/conclusão executiva; explicita critérios, alternativas, trade-offs, riscos, aceite, owners, prazos e reversão conforme a finalidade. | Diagramas `flow`, `layers`, `bars`, tabelas ponderadas (`weighted`) e fórmulas (`:::formula`) quando o cálculo for necessário. | `reviewer-*-decision`: Completude decisória, trade-offs operacionais, critérios de aceite, responsabilidade e reversão. |
 | **`magazine`** | `magazine-feature` (Reportagem Especial Ilustrada) | Matérias dinâmicas de revista (estilo *National Geographic*, *Wired*, *Superinteressante*, *Quatro Rodas*). | Abre com cena real, personagem ou conflito histórico (*lead* narrativo); prosa ágil, envolvente e sem jargão corporativo; seções contínuas sem quebras de página forçadas. | Fotos e gravuras reais (`:::figure` `kind: "image"` com `credit`), frases de destaque (`:::pullquote`), boxes de bastidores (`:::callout` `backstage`/`curiosity`) e quadros *"Em Números"* (`:::factbox`). | `reviewer-*-narrative`: Ritmo jornalístico, força do *lead*, integração entre texto/fotos/boxes e ausência de tom burocrático. |
 | **`book`** | `progressive-book` (Livro Ilustrado com Curva Progressiva) | Livros e obras completas para leitura contínua e consulta durável. | **Curva pedagógica obrigatória em 3 camadas contínuas:**<br>1. **Parte I — Porta de Entrada:** acolhe quem não conhece o tema, explica o contexto humano/histórico e conceitos básicos com analogias claras;<br>2. **Parte II — Construção e Evolução:** desenvolve a história, os bastidores e os mecanismos em profundidade crescente;<br>3. **Parte III — Domínio e Referência:** nuances avançadas, legado, guia comentado de obras/versões e referência durável. | Gravuras e fotos históricas (`:::figure` `kind: "image"`), quadros didáticos *"Para Entender Melhor"* (`:::callout` `intro`/`key-concept`), destaques (`:::pullquote`) e fichas de referência (`:::factbox`). **Proibido** inventar fórmulas matemáticas ou matrizes corporativas artificiais. | `reviewer-*-progression`: Progressão didática contínua (da introdução acessível ao domínio profundo sem saltos de jargão), prazer de leitura e riqueza visual/contextual. |
 | **`almanac`** | `illustrated-almanac` (Almanaque / Compêndio Visual de Consulta) | Almanaques temáticos, enciclopédias ilustradas, guias de universos ficcionais, carros, aviação, jogos ou história ("abra em qualquer página"). | Leitura modular e não-linear: combina textos enxutos e cativantes com alta densidade de fichas catalográficas, cronologias, recordes e curiosidades verificadas. | Fichas técnicas padronizadas (`:::factbox`), quadros *"Você Sabia?"* (`:::callout` `curiosity`), fotos/gravuras (`:::figure` `kind: "image"`), linhas do tempo (`flow`) e comparativos (`bars` / tabelas). | `reviewer-*-curation`: Curadoria modular, variedade e completude das fichas (`factbox`), curiosidades verificadas e escaneabilidade visual. |
+
+Em `technical-report` e `textbook`, escolha o perfil pelo trabalho do leitor:
+
+- `principal-tpm-csam`: decisões executivas, acompanhamento, recomendações,
+  planos, governança, procedimentos e coordenação entre stakeholders;
+- `principal-cloud-solution-architect`: decisões de arquitetura, engenharia,
+  operação de plataforma e análise técnica profunda;
+- perfil especialista do domínio: quando nenhum dos dois representar a entrega.
+
+Não transforme `principal-tpm-csam` em voz corporativa universal. Os modos
+`magazine`, `book` e `almanac` preservam seus próprios contratos editoriais.
 
 #### Regras de fluidez e prazer de leitura para `magazine`, `book` e `almanac`
 
@@ -122,6 +133,70 @@ O Document Swarm oferece cinco perfis visuais de PDF (`technical-report`, `textb
 4. **Imagens reais dos personagens/objetos com direitos e referências + gravuras sob medida (`fetch_media.py`) e auditoria visual semântica (`image_semantic_check`):** nos modos `magazine`, `book` e `almanac`, busque prioritariamente **imagens reais e oficiais dos personagens, autores, máquinas e locais** em `sources/media/` usando `scripts/checks/fetch_media.py` (`--wikipedia-page`, `--commons-file`, `--commons-search` ou `--url` de acervos enciclopédicos/oficiais), registrando obrigatoriamente os detentores de direitos autorais/licença (`credit` e `license` no manifesto e na legenda da `:::figure`, além da entrada correspondente em `sources/sources-index.md` e na seção final de *Fontes, Direitos Autorais e Créditos Iconográficos*). Quando o APIM do modelo **FLUX.2-pro** estiver configurado no cofre da máquina (Windows Credential Manager ou macOS Keychain, via `--flux-prompt`, `--flux-style` `engraving` | `manga-engraving` | `technical-cutaway` | `editorial-illustration` e `--reference-image` para ancoragem estrutural `img2img` sobre fotos reais), use-o para gravuras conceituais, diagramas em corte e arte de capa (`:::cover-art`). Toda imagem gerada ou baixada deve ser inspecionada visualmente com `view` (`image_semantic_check`) por autores, `reviewer-*-clarity` e `rubber-duck` para eliminar alucinações anatômicas/mecânicas (contagem exata de cilindros, cornetas, hélices, cabeças, pernas e dedos, **direção à direita / RHD** quando aplicável, zero textos/kanjis falsos, zero carimbos espúrios e `full-bleed` sem borda branca ociosa).
 5. **Proibição de fórmulas e matrizes artificiais fora de temas matemáticos/decisórios:** em temas culturais, históricos, biográficos ou de divulgação, não crie blocos `:::formula` nem matrizes de decisão ponderada apenas para aparentar rigor técnico; use tabelas históricas/comparativas reais (`rows`, `sum`), fichas (`:::factbox`), linhas do tempo e boxes explicativos (`:::callout`).
 6. **Completude estrutural e fôlego literário no modo `book` (`progressive-book`):** em obras no perfil `book`, **100% das unidades narrativas (`Prólogo`, `Capítulos`, `Interlúdios` e `Epílogo`)** devem abrir com página de frontispício dedicada (`:::chapter-art` com `kicker`, `src`, `caption` e `credit`), todos os capítulos numerados devem possuir notas de rodapé tipográficas (`:::footnote`) e ao menos um quadro editorial (`:::callout`, `:::pullquote` ou `:::factbox`), e cada unidade deve cumprir o piso de densidade literária (`>= 1.200` palavras de prosa por capítulo e `>= 450` palavras em prólogo, interlúdios e epílogo), validado deterministicamente por `preflight_markdown(..., book_profile=True)`. Despache os autores em lotes de 3 a 4 capítulos por agente para preservar profundidade ensaística.
+
+#### Perfil corporativo (`principal-tpm-csam`)
+
+Use `principal-tpm-csam` em entregas corporativas, técnicas e executivas cujo
+objetivo principal seja permitir decisão, execução, acompanhamento ou consulta.
+A referência é a senioridade de um Principal Technical Program Manager ou
+Customer Success Account Manager, não vínculo profissional, representação da
+Microsoft ou autorização para inventar compromissos em nome de terceiros.
+
+Antes de redigir, identifique:
+
+1. quem usará a entrega e qual conhecimento pode ser presumido;
+2. qual decisão, ação ou consulta o documento precisa permitir;
+3. qual é a data de referência e quais fatos podem mudar depois dela;
+4. quais registros pertencem somente aos bastidores do swarm.
+
+Selecione a estrutura conforme a finalidade:
+
+| Tipo de entrega | Conteúdo principal |
+| --- | --- |
+| Guia operacional | Pré-requisitos, procedimento, resultado esperado, manutenção e solução de problemas. |
+| Proposta ou recomendação | Problema, critérios, alternativas, recomendação, consequências e condições de aplicação. |
+| Acompanhamento | Decisões vigentes, owners, prazos, status, dependências e mudanças posteriores. |
+| Referência técnica | Definições, contratos, parâmetros, limites e exemplos de consulta. |
+| Relatório de análise | Questão examinada, evidências, achados, impactos e ações recomendadas. |
+
+**Seleção, precisão e temporalidade**
+
+- Comece pela decisão, ação, condição ou conclusão relevante. Use títulos que
+  identifiquem o objeto ou a tarefa; não anuncie o documento nem elogie sua
+  organização.
+- Prefira sujeito, ação e resultado. Reserve negativas para proibições,
+  restrições e condições de erro reais.
+- Diferencie fatos, premissas, estimativas, recomendações e pendências. Números
+  precisam de unidade, período, escopo e base de comparação.
+- Separe demanda criada, execução iniciada e entrega concluída. Use estes status
+  de forma consistente: `Concluído`, `Em andamento`, `Pendente`, `Planejado`,
+  `A confirmar` e `Substituído`.
+- `Concluído` exige confirmação suficiente; `Em andamento` exige trabalho
+  iniciado e próxima etapa ou dependência; `A confirmar` exige owner ou fonte
+  capaz de resolver a lacuna; `Substituído` referencia a decisão vigente.
+- Em registros decisórios, preserve a decisão original, a data e a mudança que
+  a substituiu. Não apresente uma decisão histórica como vigente.
+- Identifique pessoas somente em responsabilidade, autoria ou assinatura.
+  Componentes, times e agentes são nomeados por função ou nome oficial.
+
+**Execução, rastreabilidade e publicação**
+
+- Em procedimentos, informe pré-requisitos, ambiente, sequência, ação de
+  conclusão, resultado observável e correção dos erros relevantes.
+- Em acompanhamentos, registre decisão vigente, owner, prazo, status,
+  dependências e próximo passo. Não use `Concluído` para solicitação enviada,
+  acesso concedido para terceiro ou entrega ainda sem confirmação.
+- Priorize fontes primárias e documentação oficial. Uma referência deve
+  sustentar a afirmação para a qual é citada.
+- Separe o material publicado dos registros de produção. Prompts, logs,
+  tentativas, matrizes internas, configurações de laboratório e IDs do swarm
+  permanecem nos artefatos de trabalho.
+- Tabelas e figuras precisam de título, unidade, período, escopo, fonte e
+  legenda suficientes para leitura isolada. Use rótulos textuais além de cores,
+  links descritivos e alternativas textuais quando o formato permitir.
+
+O guia consolidado está em
+[docs/style-guide-tpm-csam.md](docs/style-guide-tpm-csam.md).
 
 #### Perfil técnico (`principal-cloud-solution-architect`)
 
@@ -701,7 +776,7 @@ D-  D  D+  C-  C  C+  B-  B  B+  A-  A  A+
 | --- | :---: | --- | --- | --- |
 | **Precisão Factual (`reviewer-*-facts`)** | `fact` (`>= 5`) | Exatidão de contagens, somas, SKUs, limites, SLAs, regiões, datas, citações `[Fxx]` e separação explícita entre fato medido, premissa, estimativa e recomendação. | 100% dos números, nomes de recursos e capacidades conferem com os insumos e fontes oficiais atuais; limitações de escopo declaradas. | Número/soma divergente, recurso inexistente no inventário, capacidade/SLA sem fonte oficial ou suposição apresentada como fato medido. |
 | **Completude Decisória / Progressão / Narrativa / Curadoria (`reviewer-*-decision` \| `progression` \| `narrative` \| `curation`)** | `form` (`0`) | Em `technical-report`/`textbook`: problema medido, critérios, alternativas, recomendação, trade-offs, aceite, reversão e **auditoria de falsos compromissos (TRIZ)** com Passo 0 anti-*over-engineering* (`"Nenhum falso compromisso detectado"` quando a arquitetura já estiver equilibrada ou restrita por invariante real) e exigência de declarar passivos operacionais secundários de cada padrão sugerido.<br>Em `book`: curva pedagógica em 3 camadas (leigo → evolução → domínio), clareza didática e integração de gravuras/boxes.<br>Em `magazine`: força do *lead* narrativo, ritmo jornalístico, *pull-quotes*, boxes de bastidores e fotos.<br>Em `almanac`: fichas catalográficas (`factbox`), quadros *"Você Sabia?"* (`callout`), cronologias e leitura não-linear. | Em `technical-report`/`textbook`: recomendação completa com trade-offs reais, reversão, passivos secundários declarados e ausência de falso dilema central não examinado (ou Passo 0 confirmado sem falsos compromissos).<br>Em `book`/`magazine`/`almanac`: texto envolvente, progressão contínua sem saltos de jargão, ausência de metatexto burocrático e uso rico de imagens, *callouts*, *pull-quotes* e *factboxes*. | Em `technical-report`/`textbook`: recomendação vaga, sem aceite/reversão, ou sustentada por falso dilema central que invalida a escolha arquitetural (acoplamentos periféricos são `minor` e não rebaixam `< A`; proibido rebaixar exigindo filas/sidecars sem contradição real).<br>Em `book`/`magazine`/`almanac`: abertura burocrática de laudo, salto abrupto de jargão para leigos, ausência de fotos/boxes previstos no brief ou fórmulas/matrizes artificiais. |
-| **Clareza e Público (`reviewer-*-clarity` / `editorial-v1` + `goldfish-v1`)** | `form` (`0`) | **Isolamento Goldfish** (avalia apenas a candidata congelada e o `reader_context` público, sem ler `brief.md`, `sources/` ou pareceres anteriores), **Paráfrase às Cegas** (`blind_paraphrase` em palavras próprias: tese central, conexão entre seções e `unconnected_sections`), **Linguagem** (direta, afirmativa, verbos concretos), **Referentes** (sem "isso"/"esse caso" vagos), **Tom** (sênior, sem slogans, clichês, travessões longos ou "diário do arquiteto") e **Autonomia** (títulos, tabelas, figuras e legendas compreensíveis isoladamente, siglas expandidas no 1º uso). | As 5 superfícies (`titles`, `openings`, `body`, `captions`, `conclusions`) e os tópicos têm `0` achados `blocking`, leitura autônoma, terminologia uniforme e `blind_paraphrase` coesa (`unconnected_sections: []`) que coincide com o `brief.md` quando auditada pelo `rubber-duck`. | Slogan promocional, metatexto de coleta/versão anterior, negativa defensiva vazia, código/sigla opaco sem definição no ponto de leitura, referente ambíguo, seção desconectada (`unconnected_sections` não vazio) ou paráfrase às cegas que diverge da intenção real do `brief.md`. |
+| **Clareza e Público (`reviewer-*-clarity` / `editorial-v1` + `goldfish-v1`)** | `form` (`0`) | **Isolamento Goldfish** (avalia apenas a candidata congelada e o `reader_context` público, sem ler `brief.md`, `sources/` ou pareceres anteriores), **Paráfrase às Cegas** (`blind_paraphrase` em palavras próprias: tese central, conexão entre seções e `unconnected_sections`), **Linguagem** (direta, afirmativa, verbos concretos), **Referentes** (sem "isso"/"esse caso" vagos), **Tom** (sênior, sem slogans, clichês, travessões longos ou "diário do arquiteto"), **Temporalidade** (status, data de referência e decisão vigente) e **Autonomia** (títulos, tabelas, figuras e legendas compreensíveis isoladamente, siglas expandidas no 1º uso). | As 5 superfícies (`titles`, `openings`, `body`, `captions`, `conclusions`) e os tópicos têm `0` achados `blocking`, leitura autônoma, terminologia e status uniformes e `blind_paraphrase` coesa (`unconnected_sections: []`) que coincide com o `brief.md` quando auditada pelo `rubber-duck`. | Slogan promocional, metatexto de coleta/versão anterior, negativa defensiva vazia, código/sigla opaco, referente ambíguo, status sem base temporal, decisão substituída apresentada como vigente, ação sem owner quando necessário, número sem unidade/período/escopo, seção desconectada ou paráfrase às cegas divergente. |
 | **Inspeção Visual e Funcional (`PDF` / `presentation`)** | `form` (`0`) | Quebra de números/identificadores em tabelas, sobreposição, cortes (`clipping`), linhas órfãs de total, contraste, hierarquia tipográfica, navegação (`interaction`) e editabilidade nativa (`editability`). | `inspection.json` com `status: pass` (`0` erros mecânicos) e páginas/slides legíveis, sem truncamento de dados ou cabeçalhos partidos ao meio. | Número ou identificador partido de forma ambígua na tabela impressa, sobreposição visual, corte de texto/figura ou falha de navegação/edição. |
 | **Auditoria Independente (`rubber-duck`)** | `rubber-duck` (`0`) | Confronto obrigatório da `blind_paraphrase` de `reviewer-*-clarity` contra o `brief.md` (`paraphrase_check`), contradições entre seções, omissões, notas `A` infladas (sem justificativa na dimensão ou contraditas pelo artefato), falhas de checks e integridade de hashes `.md` ↔ `.json` ↔ `.yaml`. | `critico: false` e `paraphrase_check.matches_brief: true` — a paráfrase às cegas reflete fielmente o objetivo do `brief.md`, todas as notas `A` se sustentam na evidência real do ciclo e os checks determinísticos (`sources`, `tables`, `gate`) fecham sem ressalvas ocultas. | `critico: true` — `paraphrase_check.matches_brief: false` (o leitor às cegas entendeu tese/arquitetura diferente da pretendida no `brief.md`), nota `A` atribuída sobre tabela/plano contraditório, justificativa que avalia outra dimensão por procuração ou etapa de qualidade pulada. |
 
@@ -710,10 +785,10 @@ D-  D  D+  C-  C  C+  B-  B  B+  A-  A  A+
 | Superfície / Severidade | Escopo de verificação | Regra de nota e bloqueio no `gate.py` |
 | --- | --- | --- |
 | **`titles`** | Capa, títulos de capítulos, seções, subseções e títulos de boxes/fichas. | Deve ser conciso, natural e adequado ao assunto e ao gênero editorial. Títulos genéricos/intercambiáveis, títulos longos/desajeitados que copiam a ementa do `brief.md` ou títulos que literalizam sem bom senso a conversa de briefing recebem obrigatoriamente `< A` (`blocking`), mesmo que o termo apareça no `brief.md`. |
-| **`openings`** | Parágrafos de abertura da capa, resumo executivo e capítulos. | Deve abrir pela conclusão técnica, impacto e números verificados; introduções vagas ("no cenário atual") recebem `< A`. |
-| **`body`** | Desenvolvimento técnico, listas, condições, exemplos e código. | Deve usar construção afirmativa, explicar mecanismos/limites, manter terminologia única e evitar parágrafos-bloco que escondam condições. |
-| **`captions`** | Títulos e notas de tabelas, figuras, diagramas e fórmulas. | Deve permitir leitura isolada com escopo, período, unidade e legenda local das abreviações (única superfície que aceita `not_applicable` quando não há figuras/tabelas). |
-| **`conclusions`** | Fechamentos de capítulos, sínteses de planos e conclusão executiva. | Deve sintetizar decisões, escopo medido, dependências e critérios de aceite sem generalizar além dos recortes medidos nem repetir slogans. |
+| **`openings`** | Parágrafos de abertura da capa, resumo executivo e capítulos. | Deve abrir pela conclusão, situação, decisão ou impacto relevante; em acompanhamentos, informa data de referência. Introduções vagas ("no cenário atual") recebem `< A`. |
+| **`body`** | Desenvolvimento técnico, listas, condições, exemplos e código. | Deve usar construção afirmativa, explicar mecanismos/limites e manter terminologia única. Em entregas TPM/CSAM, diferencia fatos, premissas e status; ações identificam owner, prazo ou dependência quando necessários. |
+| **`captions`** | Títulos e notas de tabelas, figuras, diagramas e fórmulas. | Deve permitir leitura isolada com escopo, período, unidade, fonte e legenda local das abreviações (única superfície que aceita `not_applicable` quando não há figuras/tabelas). |
+| **`conclusions`** | Fechamentos de capítulos, sínteses de planos e conclusão executiva. | Deve sintetizar decisão vigente, escopo medido, dependências, critérios de aceite, owners e próximos passos pertinentes, sem apresentar decisão substituída como atual. |
 | **`severity: blocking`** | Defeito material de linguagem, referente, tom, autonomia ou nomenclatura. | **Bloqueia o gate** (`outcome: rejected`) mesmo que alguma superfície tenha nota `A`; exige `location`, `quote` literal, `reason` e `action`. |
 | **`severity: minor`** | Sugestão de polimento estilístico, concisão ou ritmo que não compromete clareza, exatidão ou autonomia. | **Não bloqueia o gate** e **não pode** reduzir nota de superfície ou tópico para `< A` (`A-` ou menos com apenas achados `minor` é recusado com `exit 3`). |
 
@@ -1086,6 +1161,10 @@ mode: document
 max_cycles: 10
 editorial_profile: <perfil definido no enquadramento>
 audience: "<descrição concisa de 1 linha (<= 240 caracteres) do público-alvo para o reader_context>"
+delivery_type: <guia-operacional|proposta|acompanhamento|referencia-tecnica|relatorio-analise|outro>
+reader_action: "<decisão, execução ou consulta que a entrega precisa permitir>"
+reference_date: "<AAAA-MM-DD ou omitido quando não houver estado temporal>"
+publication_scope: <cliente|interno|misto>
 monitor: true
 quality_contract: editorial-v1
 comprehension_contract: goldfish-v1
@@ -1103,7 +1182,9 @@ deliverables:
 ```
 
 4. Registre enquadramento, público e familiaridade técnica, perfil editorial,
-   tópicos de importância e critérios de sucesso. Inclua clareza e utilidade
+   tipo de entrega, ação esperada do leitor, escopo de publicação, data de
+   referência quando aplicável, tópicos de importância e critérios de sucesso.
+   Inclua clareza e utilidade
    decisória na avaliação; registre adaptações e restrições do perfil.
    Liste em `deliverables` os caminhos de todas as entregas reais. Se houver
    PDF, inclua-o; não liste um formato que não será produzido. O nome em
@@ -1469,7 +1550,7 @@ model_status: "disponível confirmado"
 swarm: <swarm_id>
 sources_min: 5
 derived_from: <origem reutilizada ou vazio>
-editorial_guidance_version: "3.2.2"
+editorial_guidance_version: "3.3.0"
 ---
 
 # Autor: <Perfil>
@@ -1503,6 +1584,14 @@ Produzir os tópicos atribuídos no nível, tom e escopo do brief.
 - Separe fatos, premissas, estimativas e recomendações. Não invente valores,
   capacidades ou referências; verifique informações voláteis em fontes oficiais
   e explicite o que não foi possível confirmar. Não force equivalências multicloud.
+- Quando o perfil for `principal-tpm-csam`, selecione o conteúdo pela ação do
+  leitor. Registre data de referência, decisão vigente, owners, prazos,
+  dependências e status com semântica consistente. Não trate solicitação,
+  concessão, execução e conclusão como equivalentes.
+- Em procedimentos, inclua pré-requisitos, ambiente, sequência, ação de
+  conclusão, resultado observável e correção dos erros relevantes.
+- Mantenha prompts, logs, tentativas, matrizes internas, configurações de
+  laboratório e IDs do swarm fora da entrega publicada.
 - Explique mecanismos e limites em vez de acumular adjetivos. Evite clichês,
   linguagem promocional, conectivos repetidos e travessões longos no texto
   autoral. Preserve citações e código.
@@ -1570,7 +1659,7 @@ swarm: <swarm_id>
 sources_min: <5 para fact; 0 para form>
 scale: "D- D D+ C- C C+ B- B B+ A- A A+"
 gate: "A"
-editorial_guidance_version: "3.2.2"
+editorial_guidance_version: "3.3.0"
 ---
 
 # Revisor: <Dimensão>
@@ -1666,6 +1755,17 @@ Prefira nomes completos quando a abreviação for dispensável. Não aceite
 O relatório de candidatos de nomenclatura é apoio lexical, não avaliação
 semântica ou garantia de cobertura de imagens e trechos de código.
 
+Quando o perfil for `principal-tpm-csam`, verifique também:
+
+- se a abertura informa decisão, situação ou conclusão e a data de referência;
+- se `Concluído`, `Em andamento`, `Pendente`, `Planejado`, `A confirmar` e
+  `Substituído` correspondem aos fatos descritos;
+- se decisões substituídas apontam para a decisão vigente;
+- se ações possuem owner, prazo ou dependência quando necessários à execução;
+- se números apresentam unidade, período, escopo e base de comparação;
+- se procedimentos têm pré-requisitos, conclusão e resultado observável;
+- se logs, prompts e artefatos internos foram excluídos da publicação.
+
 Se a entrega incluir PDF, examine o texto extraído e as prévias de todas as
 páginas do bundle inspecionado. Registre falhas visuais com página e alvo;
 confira capa, sumário, tabelas multipágina, fórmulas, código e figuras.
@@ -1724,7 +1824,7 @@ model_status: "disponível confirmado"
 swarm: <swarm_id>
 gate: "A"
 max_cycles: 10
-editorial_guidance_version: "3.2.2"
+editorial_guidance_version: "3.3.0"
 ---
 
 # Coordenador
@@ -1809,7 +1909,7 @@ model_rationale: "<justificativa>"
 model_status: "disponível confirmado"
 swarm: <swarm_id>
 sources_min: 0
-editorial_guidance_version: "3.2.2"
+editorial_guidance_version: "3.3.0"
 ---
 
 # Rubber Duck
@@ -1957,6 +2057,8 @@ no gate usando apenas a biblioteca padrão.
       antigos nem editar pareceres originais.
 - [ ] Perfil editorial e público estão registrados no brief e materializados
       nos contratos dos agentes, preservando especialidades e responsabilidades.
+- [ ] Tipo de entrega, ação esperada do leitor, escopo de publicação e data de
+      referência aplicável estão registrados no brief.
 - [ ] Memória consultada e reutilizações registradas.
 - [ ] Agentes declarativos criados e `lint_agents.py` aprovado.
 - [ ] Modelos confirmados na sessão; substituições registradas.
@@ -1979,6 +2081,12 @@ no gate usando apenas a biblioteca padrão.
       corresponde aos arquivos entregues.
 - [ ] Siglas/códigos necessários estão explicados no primeiro uso e em legendas
       autônomas; convenções locais são distintas de padrões referenciados.
+- [ ] Em `principal-tpm-csam`, decisões vigentes e substituídas, status, owners,
+      datas, dependências e próximos passos estão consistentes.
+- [ ] Números relevantes possuem unidade, período, escopo e base de comparação;
+      procedimentos possuem pré-requisitos, conclusão e resultado observável.
+- [ ] Logs, prompts, matrizes internas, configurações de laboratório e IDs do
+      swarm não aparecem na entrega publicada.
 - [ ] Resultado do gate foi registrado e corresponde à revisão corrente.
 - [ ] Clareza/aderência ao público e completude decisória foram avaliadas pelos
       revisores existentes; as notas integram o portão por tópico.

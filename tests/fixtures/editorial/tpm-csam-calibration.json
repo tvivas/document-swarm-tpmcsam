@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "guidance_version": "3.3.0",
+  "profile": "principal-tpm-csam",
+  "purpose": "Casos anotados para calibrar finalidade, temporalidade, responsabilidade e quantificação sem criar um detector automático.",
+  "cases": [
+    {
+      "id": "status-without-reference",
+      "surface": "body",
+      "before": "O projeto está em andamento.",
+      "before_grade": "B+",
+      "before_analysis": {
+        "temporalidade": "O status não informa data de referência, próxima etapa ou dependência."
+      },
+      "after": "Em andamento em 12 de novembro de 2026. A validação de segurança antecede o piloto e depende da aprovação do owner de plataforma até 18 de novembro.",
+      "after_grade": "A",
+      "after_analysis": {
+        "temporalidade": "A situação, a data, a próxima etapa, a dependência e o prazo podem ser interpretados sem contexto oculto."
+      }
+    },
+    {
+      "id": "completion-without-confirmation",
+      "surface": "conclusions",
+      "before": "A implantação foi concluída após o envio da solicitação.",
+      "before_grade": "B+",
+      "before_analysis": {
+        "status": "O envio comprova a criação da demanda, não a implantação nem sua confirmação."
+      },
+      "after": "A solicitação foi enviada em 10 de novembro. A implantação permanece pendente até a confirmação do time de plataforma.",
+      "after_grade": "A",
+      "after_analysis": {
+        "status": "O texto separa solicitação e conclusão e identifica a confirmação necessária."
+      }
+    },
+    {
+      "id": "number-without-scope",
+      "surface": "captions",
+      "before": "Consumo aumentou 18%.",
+      "before_grade": "B+",
+      "before_analysis": {
+        "quantificacao": "O número não informa período, escopo ou base de comparação."
+      },
+      "after": "Consumo Azure da aplicação de crédito: aumento de 18% em outubro de 2026 contra setembro de 2026, em moeda constante.",
+      "after_grade": "A",
+      "after_analysis": {
+        "quantificacao": "A legenda identifica objeto, medida, período e base de comparação."
+      }
+    },
+    {
+      "id": "internal-production-log",
+      "surface": "openings",
+      "before": "Após três tentativas dos agentes e ajuste do prompt, consolidamos este relatório.",
+      "before_grade": "B+",
+      "before_analysis": {
+        "publicacao": "A abertura expõe bastidores do swarm sem contribuir para a decisão do leitor."
+      },
+      "after": "A análise recomenda priorizar a validação de segurança antes do piloto devido à dependência de acesso privilegiado.",
+      "after_grade": "A",
+      "after_analysis": {
+        "publicacao": "A abertura apresenta a recomendação e sua condição relevante, sem logs de produção."
+      }
+    }
+  ]
+}

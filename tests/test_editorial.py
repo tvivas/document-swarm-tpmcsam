@@ -369,7 +369,28 @@ class EditorialTests(unittest.TestCase):
         headers = re.findall(r"```markdown\s*\n---\n(.*?)\n---(?:\n|$)", skill, re.S)
         declarations = [parse_yaml(header) for header in headers]
         self.assertCountEqual([item["kind"] for item in declarations], ["author", "reviewer", "coordinator", "rubber-duck"])
-        self.assertTrue(all(item["editorial_guidance_version"] == "3.2.2" for item in declarations))
+        self.assertTrue(all(item["editorial_guidance_version"] == "3.3.0" for item in declarations))
+
+    def test_tpm_csam_calibration_covers_status_ownership_scope_and_publication(self):
+        reference = json.loads((FIXTURES / "tpm-csam-calibration.json").read_text(encoding="utf-8"))
+        self.assertEqual(reference["profile"], "principal-tpm-csam")
+        self.assertEqual(reference["guidance_version"], "3.3.0")
+        self.assertEqual(
+            {case["id"] for case in reference["cases"]},
+            {
+                "status-without-reference",
+                "completion-without-confirmation",
+                "number-without-scope",
+                "internal-production-log",
+            },
+        )
+        for case in reference["cases"]:
+            for variant in ("before", "after"):
+                with self.subTest(case=case["id"], variant=variant):
+                    data, item = self.calibration_case(case, variant)
+                    result = gate.evaluate_current(data, self.root)
+                    expected = "approved" if gate.GRADE_INDEX[item["grade"]] >= gate.GRADE_INDEX["A"] else "rejected"
+                    self.assertEqual(result["outcome"], expected)
 
     def test_nomenclature_calibration_keeps_internal_ids_and_uses_annotated_judgments(self):
         reference = json.loads((FIXTURES / "nomenclature-calibration.json").read_text(encoding="utf-8"))

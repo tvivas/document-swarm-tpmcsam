@@ -11,6 +11,10 @@ the skill uses semantic versioning for behavior changes in `SKILL.md`.
 
 - Renamed the skill identifier and managed installation path from
   `document-swarm` to `document-swarm-tpmcsam`.
+- Added the `principal-tpm-csam` editorial profile for status reports,
+  proposals, briefings, plans, operational guides, and executive analyses,
+  including purpose, temporal status, ownership, procedure, traceability, and
+  publication-scope criteria without changing the `editorial-v1` schema.
 
 ## [4.1.0] - 2026-11-12
 

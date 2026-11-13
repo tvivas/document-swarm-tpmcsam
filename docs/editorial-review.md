@@ -27,6 +27,28 @@ têm função concreta. O teste é a utilidade e a especificidade da redação.
 Esses exemplos não são uma blacklist. Trocar algumas palavras e preservar a
 mesma construção vazia continua sendo um problema editorial.
 
+## Perfil `principal-tpm-csam`
+
+Em status reports, propostas, planos, briefings, análises e guias operacionais,
+o revisor aplica também o
+[guia TPM/CSAM](./style-guide-tpm-csam.md). O teste editorial continua nas cinco
+superfícies existentes; não há novo schema nem agente.
+
+| Aspecto | Pergunta de revisão |
+|---|---|
+| Finalidade | O leitor reconhece a decisão, ação ou consulta que a entrega permite? |
+| Temporalidade | Status e decisões informam a data de referência e distinguem solicitado, iniciado e concluído? |
+| Responsabilidade | Ações identificam owner, prazo ou dependência quando isso é necessário para execução? |
+| Quantificação | Números possuem unidade, período, escopo e base de comparação? |
+| Procedimento | Pré-requisitos, conclusão, resultado observável e correções relevantes estão presentes? |
+| Publicação | Logs, prompts, IDs do swarm e configurações de laboratório ficaram nos registros internos? |
+
+São defeitos materiais: decisão substituída apresentada como vigente, conclusão
+sem confirmação suficiente, ação sem responsabilidade identificável, número que
+não pode ser interpretado por falta de unidade/período/escopo e procedimento sem
+resultado observável. Polimento de ritmo sem impacto nesses aspectos permanece
+`minor`.
+
 ## Como fundamentar a nota
 
 Uma afirmação pode ser arquiteturalmente válida e inadequada ao público pela
